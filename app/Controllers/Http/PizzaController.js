@@ -5,7 +5,17 @@ class PizzaController {
 
     async store({ request, response }) {
         try {
-            const data = request.only(['name', 'description', 'price', 'styling', 'status'])
+            const pizza = request.file('fileSource', {
+                types: ['image'],
+                size: '2mb'
+            })
+
+            await Pizza.moveAll(Helpers.tmpPath('uploads'))
+
+            if (!pizza.movedAll()) {
+                return pizza.errors()
+            }
+            const data = request.only(['name', 'description', 'price', 'styling', 'status', 'file'])
             const pizza = await Pizza.create(data)
             return response
                 .status(200)

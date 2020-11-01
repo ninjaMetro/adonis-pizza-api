@@ -13,6 +13,10 @@ class PizzaSchema extends Schema {
             table.integer('price', 5).notNullable()
             table.string('styling').notNullable().references('topping').inTable('toppings')
             table.string('status', 30).notNullable()
+            table.string('file', 254)
+            table.string('fileSource', 254)
+
+
         })
     }
 
