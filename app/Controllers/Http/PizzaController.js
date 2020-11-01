@@ -1,16 +1,15 @@
 'use strict'
+const Pizza = use('App/Models/Pizza')
 
-// Import Topping Model
-const Topping = use('App/Models/Topping')
+class PizzaController {
 
-class ToppingController {
     async store({ request, response }) {
         try {
-            const data = request.only(['topping'])
-            const topping = await Topping.create(data)
+            const data = request.only(['name', 'description', 'price', 'styling', 'status'])
+            const pizza = await Pizza.create(data)
             return response
                 .status(200)
-                .send({ success: { message: 'Topping Added' } })
+                .send({ success: { message: 'pizza Added' } })
         } catch (err) {
             return response
                 .status(err.status)
@@ -19,18 +18,18 @@ class ToppingController {
     }
 
     async index({ params }) {
-        const toppingId = params.id
-        const topping = await Topping.query()
-            .where('id', toppingId)
+        const pizzaId = params.id
+        const pizza = await Pizza.query()
+            .where('id', pizzaId)
             .fetch()
-        return topping
+        return pizza
     }
 
     async get({ request, response }) {
 
         try {
-            const topping = await Topping.query().fetch()
-            return topping
+            const pizza = await Pizza.query().fetch()
+            return pizza
         } catch (error) {
             return response
                 .status(err.status)
@@ -41,13 +40,13 @@ class ToppingController {
     async update({ params, request, response }) {
 
         try {
-            const data = request.only(['topping'])
-            const topping = await Topping.findOrFail(params.id) // looking for topping
-            topping.merge(data)
-            await topping.save()
+            const data = request.only(['name', 'description', 'price', 'styling', 'status'])
+            const pizza = await Pizza.findOrFail(params.id) // looking for pizza
+            pizza.merge(data)
+            await pizza.save()
             return response
                 .status(200)
-                .send({ success: { message: 'Topping Updated' } })
+                .send({ success: { message: 'Pizza Updated' } })
 
         } catch (error) {
             return response
@@ -60,11 +59,11 @@ class ToppingController {
     async destroy({ params, response }) {
 
         try {
-            const topping = await Topping.findOrFail(params.id)
-            await topping.delete()
+            const pizza = await Pizza.findOrFail(params.id)
+            await pizza.delete()
             return response
                 .status(200)
-                .send({ success: { message: 'Topping deleted' } })
+                .send({ success: { message: 'Pizza deleted' } })
         } catch (error) {
             return response
                 .status(err.status)
@@ -74,4 +73,4 @@ class ToppingController {
     }
 }
 
-module.exports = ToppingController
+module.exports = PizzaController
