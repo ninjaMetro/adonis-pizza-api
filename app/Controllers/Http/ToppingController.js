@@ -19,10 +19,31 @@ class ToppingController {
         }
     }
 
+    async index({ params }) {
+        const toppingId = params.id
+
+        const topping = await Topping.query()
+            .where('id', toppingId)
+            .fetch()
+
+        return topping
+    }
+
     async get({ request }) {
         // const { page } = request.get()
 
         const topping = await Topping.query().fetch()
+
+        return topping
+    }
+
+    async update({ params, request }) {
+        const data = request.only(['topping'])
+        const topping = await Topping.findOrFail(params.id) // looking for topping
+
+        topping.merge(data)
+
+        await topping.save()
 
         return topping
     }
