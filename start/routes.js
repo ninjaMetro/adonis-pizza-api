@@ -21,3 +21,5 @@ Route.put('pizza/update/:id', 'PizzaController.update')
 Route.get('pizza', 'PizzaController.get')
 Route.get('pizza/:id', 'PizzaController.index')
 Route.delete('pizza/:id', 'PizzaController.destroy')
+
+Route.post('pizza/upload', 'ImageController.upload')
