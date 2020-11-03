@@ -5,7 +5,7 @@ class PizzaController {
 
     async store({ request, response }) {
         try {
-            const data = request.only(['name', 'description', 'price', 'styling', 'status', 'file'])
+            const data = request.only(['name', 'description', 'price', 'styling', 'status'])
             const pizza = await Pizza.create(data)
             return response
                 .status(200)
