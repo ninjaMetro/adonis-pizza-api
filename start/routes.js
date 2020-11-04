@@ -24,3 +24,10 @@ Route.delete('pizza/:id', 'PizzaController.destroy')
 
 Route.post('pizza/upload', 'FileController.store')
 Route.get('files/:id', 'FileController.show')
+
+
+//Delivery Routes
+Route.post('delivery/create', 'DeliveryController.store')
+Route.put('delivery/update/:id', 'DeliveryController.update')
+Route.get('delivery', 'DeliveryController.get')
+Route.delete('delivery/:id', 'DeliveryController.destroy')
