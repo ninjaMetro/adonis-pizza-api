@@ -14,7 +14,7 @@ class OrderSchema extends Schema {
             table.string('topping', 254).notNullable()
             table.integer('price', 5).notNullable()
             table.integer('quantity', 2).notNullable()
-            table.string('delivery_type', 5).notNullable()
+            table.string('delivery_type', 10).notNullable()
             table.string('delivery_instructions', 254)
             table.string('order_status', 15)
         })

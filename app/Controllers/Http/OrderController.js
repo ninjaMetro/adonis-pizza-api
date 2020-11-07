@@ -6,7 +6,7 @@ class OrderController {
 
     async store({ request, response }) {
         try {
-            const data = request.only(['customer_name', 'customer_phone', 'pizza_type', 'topping', 'price', 'quantity', 'delivery_type', 'delivery_instructions', 'order_status'])
+            const data = request.only(['customer_name', 'customer_phone', 'pizza_type', 'topping', 'price', 'quantity', 'delivery_type', 'delivery_instructions'])
             const order = await Order.create(data)
             return response
                 .status(200)
