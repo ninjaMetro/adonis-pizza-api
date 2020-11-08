@@ -38,10 +38,31 @@ class OrderController {
         }
     }
 
-    async get({ request, response }) {
-        const orderStatus = request.input('order_status')
+    async getCompletedOrders({ request, response }) {
         try {
-            const order = await Order.query().where('order_status', orderStatus).fetch()
+            const order = await Order.query().where('order_status', 'Completed').fetch()
+            return order
+        } catch (error) {
+            return response
+                .status(err.status)
+                .send(err)
+        }
+    }
+
+    async getTransitOrders({ request, response }) {
+        try {
+            const order = await Order.query().where('order_status', 'In Transit').fetch()
+            return order
+        } catch (error) {
+            return response
+                .status(err.status)
+                .send(err)
+        }
+    }
+
+    async getPendingOrders({ request, response }) {
+        try {
+            const order = await Order.query().where('order_status', 'Pending').fetch()
             return order
         } catch (error) {
             return response
