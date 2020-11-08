@@ -36,6 +36,7 @@ Route.delete('delivery/:id', 'DeliveryController.destroy')
 //Order Routes
 Route.post('order/create', 'OrderController.store')
 Route.put('order/update/:id', 'OrderController.update')
-Route.get('order', 'OrderController.get')
+Route.get('orders/all', 'OrderController.getAllOrders')
+Route.get('orders', 'OrderController.get')
 Route.get('order/:id', 'OrderController.index')
 Route.delete('order/:id', 'OrderController.destroy')

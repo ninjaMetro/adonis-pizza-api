@@ -6,7 +6,7 @@ class OrderController {
 
     async store({ request, response }) {
         try {
-            const data = request.only(['customer_name', 'customer_phone', 'pizza_type', 'topping', 'price', 'quantity', 'delivery_type', 'delivery_instructions'])
+            const data = request.only(['customer_name', 'customer_phone', 'pizza_type', 'topping', 'price', 'quantity', 'delivery_type', 'delivery_instructions', 'order_status'])
             const order = await Order.create(data)
             return response
                 .status(200)
@@ -26,10 +26,22 @@ class OrderController {
         return order
     }
 
-    async get({ request, response }) {
 
+    async getAllOrders({ request, response }) {
         try {
             const order = await Order.query().fetch()
+            return order
+        } catch (error) {
+            return response
+                .status(err.status)
+                .send(err)
+        }
+    }
+
+    async get({ request, response }) {
+        const orderStatus = request.input('order_status')
+        try {
+            const order = await Order.query().where('order_status', orderStatus).fetch()
             return order
         } catch (error) {
             return response
