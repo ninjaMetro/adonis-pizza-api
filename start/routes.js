@@ -35,10 +35,12 @@ Route.delete('delivery/:id', 'DeliveryController.destroy')
 
 //Order Routes
 Route.post('order/create', 'OrderController.store')
-Route.put('order/update/:id', 'OrderController.update')
+Route.put('order/updateStatus/:id', 'OrderController.updateStatus')
 Route.get('orders/all', 'OrderController.getAllOrders')
 Route.get('orders/pending', 'OrderController.getPendingOrders')
+Route.get('orders/cooking', 'OrderController.getCookingOrders')
 Route.get('orders/transit', 'OrderController.getTransitOrders')
+Route.get('orders/pickup', 'OrderController.getPickupOrders')
 Route.get('orders/completed', 'OrderController.getCompletedOrders')
 Route.get('order/:id', 'OrderController.index')
 Route.delete('order/:id', 'OrderController.destroy')

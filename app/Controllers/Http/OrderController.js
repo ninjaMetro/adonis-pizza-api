@@ -71,7 +71,29 @@ class OrderController {
         }
     }
 
-    async update({ params, request, response }) {
+    async getCookingOrders({ request, response }) {
+        try {
+            const order = await Order.query().where('order_status', 'Cooking').fetch()
+            return order
+        } catch (error) {
+            return response
+                .status(err.status)
+                .send(err)
+        }
+    }
+
+    async getPickupOrders({ request, response }) {
+        try {
+            const order = await Order.query().where('order_status', 'Pickup').fetch()
+            return order
+        } catch (error) {
+            return response
+                .status(err.status)
+                .send(err)
+        }
+    }
+
+    async updateStatus({ params, request, response }) {
 
         try {
             const data = request.only(['order_status'])
@@ -80,7 +102,7 @@ class OrderController {
             await order.save()
             return response
                 .status(200)
-                .send({ success: { message: 'Order Updated' } })
+                .send({ success: { message: 'Order Status Updated' } })
 
         } catch (error) {
             return response
