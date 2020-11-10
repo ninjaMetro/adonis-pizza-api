@@ -44,3 +44,10 @@ Route.get('orders/pickup', 'OrderController.getPickupOrders')
 Route.get('orders/completed', 'OrderController.getCompletedOrders')
 Route.get('order/:id', 'OrderController.index')
 Route.delete('order/:id', 'OrderController.destroy')
+
+//Expenses Routes
+Route.post('expenses/create', 'ExpenseController.store')
+Route.put('expenses/update/:id', 'ExpenseController.update')
+Route.get('expenses', 'ExpenseController.get')
+Route.get('expenses/:id', 'ExpenseController.index')
+Route.delete('expenses/:id', 'ExpenseController.destroy')
